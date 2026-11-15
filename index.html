@@ -478,14 +478,12 @@ textarea::placeholder{color:var(--faint);}
       </div>
       <button class="ghost-btn" id="btnRail" title="显示/隐藏右侧面板">侧栏</button>
       <button class="ghost-btn" id="btnHelp" title="使用说明">?</button>
-      <button class="ghost-btn" id="btnReport" title="生成复原报告">报告</button>
       <div class="export-wrap">
         <button class="ghost-btn" id="btnExport" title="导出当前成果">导出</button>
         <div class="export-menu" id="exportMenu">
           <button data-exp="section">剖面图 PNG</button>
           <button data-exp="scene">三维视图 PNG</button>
           <button data-exp="params">当前参数 JSON</button>
-          <button data-exp="report">实验报告 Markdown</button>
         </div>
       </div>
     </div>
@@ -496,24 +494,6 @@ textarea::placeholder{color:var(--faint);}
       <div class="rail-scroll">
         <div class="rail-head">实验台 <em id="railHint">选择一项构造实验</em></div>
         <div class="case-list" id="caseList"></div>
-
-        <section class="card" id="cardQuestion">
-          <div class="card-head"><span class="tag q">Q</span>科学问题</div>
-          <p class="question-text" id="questionText"></p>
-          <p class="hint" id="questionHint"></p>
-          <div class="mech-list" id="mechList"></div>
-          <div class="mech-note" id="mechNote">先选一个你认为最可能的机制，再看证据。</div>
-        </section>
-
-        <section class="card" id="cardPredict">
-          <div class="card-head"><span class="tag p">P</span>预测卡<span class="sub">复原之前写下</span></div>
-          <p class="hint">若为所选机制，剖面上应当看到什么？写下来，作为后面检验的标尺。</p>
-          <textarea id="predictInput" rows="3" placeholder="例如：两翼产状应镜像对称，核部出露更老的地层……"></textarea>
-          <div class="btn-row">
-            <button class="mini-btn" id="btnPredictSave">记录预测</button>
-            <span class="save-hint" id="predictSaved"></span>
-          </div>
-        </section>
       </div>
     </aside>
 
@@ -535,10 +515,7 @@ textarea::placeholder{color:var(--faint);}
         <span id="cutLabel">完整岩块</span>
       </div>
       <div class="viewtools">
-        <button data-view="front" title="正视剖面">正视</button>
-        <button data-view="iso" title="等轴视角">等轴</button>
-        <button data-view="top" title="俯视">俯视</button>
-        <button data-view="reset" title="重置视角">复位</button>
+        <button id="btnSculpt" title="地形塑形：拖动地表抬升/压低">塑形：开</button>
         <button id="btnForces" title="受力箭头（H）">受力</button>
         <button id="btnImmersive" title="沉浸视图（F）">沉浸</button>
       </div>
@@ -554,8 +531,7 @@ textarea::placeholder{color:var(--faint);}
 
     <aside class="rail rail-right">
       <div class="tabs" id="tabs">
-        <button data-tab="evidence" class="on">证据</button>
-        <button data-tab="params">参数</button>
+        <button data-tab="params" class="on">参数</button>
         <button data-tab="verify">检验</button>
       </div>
       <div class="tab-body" id="tabBody"></div>
@@ -21041,12 +21017,12 @@ textarea::placeholder{color:var(--faint);}
     C("karst", 3.4)
   ];
   var unconformityCol = [
-    C("dolomiteKarst", 3.2, { group: "lower" }),
-    C("dolomiteKarst", 4.2, { group: "lower" }),
-    C("dolomiteKarst", 3.0, { group: "lower" }),
-    C("karst", 3.6, { group: "upper" }),
-    C("karst", 4.4, { group: "upper" }),
-    C("karst", 3.2, { group: "upper" })
+    C("karst", 3.2, { group: "lower" }),
+    C("karst", 4.2, { group: "lower" }),
+    C("karst", 3.0, { group: "lower" }),
+    C("dolomiteKarst", 3.6, { group: "upper" }),
+    C("dolomiteKarst", 4.4, { group: "upper" }),
+    C("dolomiteKarst", 3.2, { group: "upper" })
   ];
   var CASES = [
     {
@@ -21223,9 +21199,9 @@ textarea::placeholder{color:var(--faint);}
       no: "03",
       title: "\u5E73\u884C\u6574\u5408 \xB7 \u6C9F\u5729\u5C71",
       en: "PARALLEL CONFORMITY",
-      subtitle: "\u4E0B\u90E8\u5CA9\u5173\u7EC4\u767D\u4E91\u5CA9\u3001\u4E0A\u90E8\u5927\u5858\u7EC4\u7070\u5CA9\uFF0C\u4E24\u5957\u5730\u5C42\u540C\u5411\u503E\u659C\u6210\u9AA4\u574E",
+      subtitle: "\u4E0B\u90E8\u5CA9\u5173\u7EC4\u7070\u5CA9\u3001\u4E0A\u90E8\u5927\u5858\u7EC4\u767D\u4E91\u5CA9\uFF0C\u4E24\u5957\u5730\u5C42\u540C\u5411\u503E\u659C\u6210\u9AA4\u574E",
       accent: "#e8eef2",
-      question: "\u6C9F\u5729\u5C71\u5761\u9762\u4E2D\u90E8\u88AB\u4FB5\u8680\u5207\u5F00\uFF0C\u5207\u53E3\u4E24\u4FA7\u540C\u65F6\u51FA\u9732\u4E0A\u90E8\u5927\u5858\u7EC4\u7070\u5CA9\u4E0E\u4E0B\u90E8\u5CA9\u5173\u7EC4\u767D\u4E91\u5CA9\u3002\u8FD9\u4E24\u5957\u5730\u5C42\u662F\u6574\u5408\u3001\u5E73\u884C\u4E0D\u6574\u5408\uFF0C\u8FD8\u662F\u89D2\u5EA6\u4E0D\u6574\u5408\uFF1F",
+      question: "\u6C9F\u5729\u5C71\u5761\u9762\u4E2D\u90E8\u88AB\u4FB5\u8680\u5207\u5F00\uFF0C\u5207\u53E3\u4E24\u4FA7\u540C\u65F6\u51FA\u9732\u4E0A\u90E8\u5927\u5858\u7EC4\u767D\u4E91\u5CA9\u4E0E\u4E0B\u90E8\u5CA9\u5173\u7EC4\u7070\u5CA9\u3002\u8FD9\u4E24\u5957\u5730\u5C42\u662F\u6574\u5408\u3001\u5E73\u884C\u4E0D\u6574\u5408\uFF0C\u8FD8\u662F\u89D2\u5EA6\u4E0D\u6574\u5408\uFF1F",
       hint: '\u6CE8\u610F\u4E09\u6761\u7EBF\u7D22\uFF1A\u4E0A\u4E0B\u4EA7\u72B6\u5DEE\u3001\u63A5\u89E6\u9762\u9644\u8FD1\u662F\u5426\u6709\u5E95\u783E\u5CA9\u4E0E\u53E4\u98CE\u5316\u58F3\u3001\u4EE5\u53CA\u5730\u5C42\u67F1\u662F\u5426\u8FDE\u7EED\u3002',
       mechanisms: [
         { id: "m1", label: "\u5E73\u884C\u6574\u5408 \xB7 \u4EA7\u72B6\u4E00\u81F4\u3001\u5C42\u5E8F\u8FDE\u7EED", desc: "\u6CA1\u6709\u62AC\u5347\u5265\u8680\uFF0C\u4E0A\u4E0B\u5730\u5C42\u8FDE\u7EED\u6C89\u79EF", right: true },
@@ -21266,15 +21242,15 @@ textarea::placeholder{color:var(--faint);}
         { key: "shorten", label: "\u4E0B\u4F0F\u5C42\u7F29\u77ED\u7387", min: 0, max: 0.28, step: 5e-3, fmt: (v) => (v * 100).toFixed(1) + "%" }
       ],
       keyframes: [
-        { t: 0, label: "\u2460 \u6574\u4F53\u6C89\u79EF", note: "\u4E0B\u90E8\u5CA9\u5173\u7EC4\u767D\u4E91\u5CA9\u6C89\u79EF\u540E\uFF0C\u4E0A\u90E8\u5927\u5858\u7EC4\u7070\u5CA9\u8FDE\u7EED\u8986\u76D6\uFF0C\u4EA7\u72B6\u4E00\u81F4", p: { deposit: 1, tilt: 0, windowDepth: 0, shorten: 0, erodeDepth: 0, erodeRelief: 0 } },
+        { t: 0, label: "\u2460 \u6574\u4F53\u6C89\u79EF", note: "\u4E0B\u90E8\u5CA9\u5173\u7EC4\u7070\u5CA9\u6C89\u79EF\u540E\uFF0C\u4E0A\u90E8\u5927\u5858\u7EC4\u767D\u4E91\u5CA9\u8FDE\u7EED\u8986\u76D6\uFF0C\u4EA7\u72B6\u4E00\u81F4", p: { deposit: 1, tilt: 0, windowDepth: 0, shorten: 0, erodeDepth: 0, erodeRelief: 0 } },
         { t: 0.22, label: "\u2461 \u4FA7\u5411\u6324\u538B", note: "\u53D7\u6324\u538B\u5F00\u59CB\u88AB\u52A8\u5F2F\u66F2\uFF0C\u672C\u9732\u5934\u4F4D\u4E8E\u80CC\u659C\u53F3\u7FFC", p: { tilt: 4, windowDepth: 0, shorten: 0.06 } },
         { t: 0.45, label: "\u2462 \u8936\u76B1\u4E0E\u503E\u659C\u5B9A\u578B", note: "\u53F3\u7FFC\u5730\u5C42\u503E\u5411 179\xB0\u222035\xB0\u3001188\xB0\u222023\xB0\uFF0C\u4E24\u5957\u5730\u5C42\u4EA7\u72B6\u4E00\u81F4", p: { tilt: 4, windowDepth: 0, shorten: 0.1 } },
-        { t: 0.72, label: "\u2463 \u62AC\u5347\u4E0E\u5265\u8680", note: "\u80CC\u659C\u9686\u8D77\uFF0C\u5265\u8680\u9762\u9010\u5C42\u4E0B\u5207\uFF0C\u4E0A\u8986\u7070\u5CA9\u9010\u6E10\u53D8\u8584", p: { tilt: 4, shorten: 0.12, erodeDepth: 8, erodeRelief: 0.5 } },
-        { t: 1, label: "\u2464 \u4E24\u5957\u5730\u5C42\u51FA\u9732\u5B9A\u578B", note: "\u6838\u90E8\u62B1\u66F2\u5904\u4E0A\u8986\u7070\u5CA9\u5C16\u706D\u53D8\u8584\u3001\u4E0B\u4F0F\u767D\u4E91\u5CA9\u53D8\u539A\uFF0C\u4E24\u5957\u5730\u5C42\u7684\u4EA4\u7EBF\u5728\u6838\u90E8\u51FA\u9732", p: { tilt: 4, shorten: 0.12, erodeDepth: 11.2, erodeRelief: 0.6 } }
+        { t: 0.72, label: "\u2463 \u62AC\u5347\u4E0E\u5265\u8680", note: "\u80CC\u659C\u9686\u8D77\uFF0C\u5265\u8680\u9762\u9010\u5C42\u4E0B\u5207\uFF0C\u4E0A\u8986\u767D\u4E91\u5CA9\u9010\u6E10\u53D8\u8584", p: { tilt: 4, shorten: 0.12, erodeDepth: 8, erodeRelief: 0.5 } },
+        { t: 1, label: "\u2464 \u4E24\u5957\u5730\u5C42\u51FA\u9732\u5B9A\u578B", note: "\u6838\u90E8\u62B1\u66F2\u5904\u4E0A\u8986\u767D\u4E91\u5CA9\u5C16\u706D\u53D8\u8584\u3001\u4E0B\u4F0F\u7070\u5CA9\u53D8\u539A\uFF0C\u4E24\u5957\u5730\u5C42\u7684\u4EA4\u7EBF\u5728\u6838\u90E8\u51FA\u9732", p: { tilt: 4, shorten: 0.12, erodeDepth: 11.2, erodeRelief: 0.6 } }
       ],
       evidence: [
-        { k: "\u4E0B\u90E8\u767D\u4E91\u5CA9\uFF08\u5CA9\u5173\u7EC4\uFF09\u4EA7\u72B6", v: "\u503E\u5411 171\xB0\u222043\xB0\uFF08\u8D70\u5411 81\xB0/261\xB0\uFF09\u3001107\xB0\u222018\xB0\uFF0817\xB0/197\xB0\uFF09\u3001198\xB0\u222041\xB0\uFF08108\xB0/288\xB0\uFF09", kind: "measured", src: "\u6C9F\u5729\u5C71\u7F57\u76D8\u5B9E\u6D4B\uFF082026-10-29\uFF09" },
-        { k: "\u4E0A\u90E8\u7070\u5CA9\uFF08\u5927\u5858\u7EC4\uFF09\u4EA7\u72B6", v: "\u503E\u5411 179\xB0\u222035\xB0\uFF0889\xB0/269\xB0\uFF09\u3001154\xB0\u222052\xB0\uFF0864\xB0/244\xB0\uFF09\u3001188\xB0\u222023\xB0\uFF0898\xB0/278\xB0\uFF09", kind: "measured", src: "\u6C9F\u5729\u5C71\u7F57\u76D8\u5B9E\u6D4B" },
+        { k: "\u4E0B\u90E8\u7070\u5CA9\uFF08\u5CA9\u5173\u7EC4\uFF09\u4EA7\u72B6", v: "\u503E\u5411 171\xB0\u222043\xB0\uFF08\u8D70\u5411 81\xB0/261\xB0\uFF09\u3001107\xB0\u222018\xB0\uFF0817\xB0/197\xB0\uFF09\u3001198\xB0\u222041\xB0\uFF08108\xB0/288\xB0\uFF09", kind: "measured", src: "\u6C9F\u5729\u5C71\u7F57\u76D8\u5B9E\u6D4B\uFF082026-10-29\uFF09" },
+        { k: "\u4E0A\u90E8\u767D\u4E91\u5CA9\uFF08\u5927\u5858\u7EC4\uFF09\u4EA7\u72B6", v: "\u503E\u5411 179\xB0\u222035\xB0\uFF0889\xB0/269\xB0\uFF09\u3001154\xB0\u222052\xB0\uFF0864\xB0/244\xB0\uFF09\u3001188\xB0\u222023\xB0\uFF0898\xB0/278\xB0\uFF09", kind: "measured", src: "\u6C9F\u5729\u5C71\u7F57\u76D8\u5B9E\u6D4B" },
         { k: "\u63A5\u89E6\u9762\u5F62\u6001", v: "\u4E0A\u4E0B\u4EA7\u72B6\u8FD1\u5E73\u884C\uFF0C\u89D2\u5EA6\u5DEE < 10\xB0\uFF0C\u65E0\u5DEE\u5F02\u5265\u8680", kind: "measured", src: "\u7F57\u76D8\u5B9E\u6D4B" },
         { k: "\u5E95\u783E\u5CA9", v: "\u63A5\u89E6\u9762\u4E0A\u4E0B\u5747\u4E3A\u78B3\u9178\u76D0\u5CA9\uFF0C\u672A\u89C1\u783E\u5CA9\u6216\u53E4\u98CE\u5316\u58F3", kind: "measured", src: "\u9732\u5934\u89C2\u5BDF" },
         { k: "\u5C42\u5E8F\u8FDE\u7EED\u6027", v: "\u5CA9\u5173\u7EC4\u4E0E\u5927\u5858\u7EC4\u8FDE\u7EED\u63A5\u89E6\uFF0C\u672A\u89C1\u7F3A\u5931\u5C42\u4F4D", kind: "derived", src: "\u5256\u9762\u5224\u8BFB" },
@@ -21538,7 +21514,7 @@ textarea::placeholder{color:var(--faint);}
       xs[i] = -half + MODEL.width * i / (n - 1);
     return xs;
   }
-  function buildSection({ xs, column, params, seed = 7 }) {
+  function buildSection({ xs, column, params, seed = 7, sculpt = null, sculptK = 1 }) {
     const p = params;
     const cover = column.filter((c) => c.group !== "upper");
     const upper = column.filter((c) => c.group === "upper");
@@ -21717,6 +21693,30 @@ textarea::placeholder{color:var(--faint);}
           }
           layers.push({ ...upper[i], yBot, yTop, present, isUpper: true });
           plane += th;
+        }
+      }
+    }
+    if (sculpt && sculpt.on !== false && Array.isArray(sculpt.delta)) {
+      const whole = sculpt.mode === "whole";
+      for (let j = 0; j < xs.length && j < sculpt.delta.length; j++) {
+        const d = (+sculpt.delta[j] || 0) * sculptK;
+        if (Math.abs(d) < 1e-4)
+          continue;
+        if (whole) {
+          for (const L of layers) {
+            if (!L.present[j])
+              continue;
+            L.yBot[j] += d;
+            L.yTop[j] += d;
+          }
+        } else {
+          for (let k = layers.length - 1; k >= 0; k--) {
+            const L = layers[k];
+            if (!L.present[j])
+              continue;
+            L.yTop[j] = Math.max(L.yBot[j] + 0.02, L.yTop[j] + d);
+            break;
+          }
         }
       }
     }
@@ -24676,8 +24676,8 @@ textarea::placeholder{color:var(--faint);}
     const out = [];
     if (caseId === "unconformity" && snap.fold) {
       const fx = snap.fold.phaseX;
-      out.push({ text: "<b>\u5927\u5858\u7EC4</b> \u77F3\u7070\u5CA9", x: fx - 46, y: topY(fx - 46) - 3, z: zFront });
-      out.push({ text: "<b>\u5CA9\u5173\u7EC4</b> \u767D\u4E91\u5CA9", x: fx + 42, y: topY(fx + 42) - 9.5, z: zFront });
+      out.push({ text: "<b>\u5927\u5858\u7EC4</b> \u767D\u4E91\u5CA9", x: fx - 46, y: topY(fx - 46) - 3, z: zFront });
+      out.push({ text: "<b>\u5CA9\u5173\u7EC4</b> \u77F3\u7070\u5CA9", x: fx + 42, y: topY(fx + 42) - 9.5, z: zFront });
     }
     if (caseId === "fold") {
       const cx = snap.fold.phaseX;
@@ -25449,12 +25449,8 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
   // src/main.js
   var $ = (s) => document.querySelector(s);
   var STEPS = [
-    { id: "Q", label: "\u95EE\u9898", tab: null },
-    { id: "E", label: "\u8BC1\u636E", tab: "evidence" },
-    { id: "P", label: "\u9884\u6D4B", tab: "evidence" },
     { id: "R", label: "\u590D\u539F", tab: "params" },
-    { id: "V", label: "\u68C0\u9A8C", tab: "verify" },
-    { id: "Rpt", label: "\u62A5\u544A", tab: null }
+    { id: "V", label: "\u68C0\u9A8C", tab: "verify" }
   ];
   var LS = "geolab.v3";
   var XS = makeGrid(MODEL.nx);
@@ -25471,7 +25467,7 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
     t: 0,
     playing: false,
     step: 0,
-    tab: "evidence",
+    tab: "params",
     mode: "specimen",
     cut: 0,
     votes: {},
@@ -25492,7 +25488,8 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
     secPin: null,
     immersive: false,
     compare: false,
-    snapCmp: null
+    snapCmp: null,
+    sculpts: {}
   };
   var stage;
   var labels;
@@ -25503,7 +25500,8 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
         caseId: S.caseId,
         params: S.params,
         votes: S.votes,
-        preds: S.preds
+        preds: S.preds,
+        sculpts: S.sculpts
       }));
     } catch (e) {
     }
@@ -25534,6 +25532,30 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
             S.preds[c.id] = v.slice(0, PRED_MAX);
         });
       }
+      if (d.sculpts && typeof d.sculpts === "object") {
+        CASES.forEach((c) => {
+          const raw = d.sculpts[c.id];
+          if (!raw || typeof raw !== "object")
+            return;
+          const delta = new Array(XS.length).fill(0);
+          if (Array.isArray(raw.delta)) {
+            for (let i = 0; i < Math.min(delta.length, raw.delta.length); i++) {
+              const v = raw.delta[i];
+              if (typeof v === "number" && Number.isFinite(v))
+                delta[i] = Math.max(-25, Math.min(25, v));
+            }
+          }
+          const st = +raw.strength, rd = +raw.radius;
+          S.sculpts[c.id] = {
+            on: raw.on !== false,
+            mode: raw.mode === "whole" ? "whole" : "surface",
+            strength: Number.isFinite(st) ? Math.max(0.2, Math.min(3, st)) : 1,
+            radius: Number.isFinite(rd) ? Math.max(3, Math.min(40, rd)) : 12,
+            erase: !!raw.erase,
+            delta
+          };
+        });
+      }
       if (d.caseId && caseById(d.caseId))
         S.caseId = d.caseId;
     } catch (e) {
@@ -25556,6 +25578,142 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
     if (raw.faultType === "normal" || raw.faultType === "reverse")
       out.faultType = raw.faultType;
     return out;
+  }
+  function sculptOf(id) {
+    let sc = S.sculpts[id];
+    if (!sc) {
+      sc = S.sculpts[id] = {
+        on: true,
+        mode: "surface",
+        strength: 1,
+        radius: 12,
+        erase: false,
+        delta: new Array(XS.length).fill(0)
+      };
+    }
+    if (!Array.isArray(sc.delta) || sc.delta.length !== XS.length) {
+      const d = new Array(XS.length).fill(0);
+      if (Array.isArray(sc.delta))
+        for (let i = 0; i < Math.min(d.length, sc.delta.length); i++)
+          d[i] = +sc.delta[i] || 0;
+      sc.delta = d;
+    }
+    return sc;
+  }
+  function sculptTopAt(snap, x) {
+    const xs = snap.xs;
+    const step = xs[1] - xs[0];
+    if (!(step > 0))
+      return null;
+    const fi = (x - xs[0]) / step;
+    if (fi < 0 || fi > xs.length - 1)
+      return null;
+    const i = Math.min(xs.length - 2, Math.floor(fi));
+    return snap.topCurve[i] + (snap.topCurve[i + 1] - snap.topCurve[i]) * (fi - i);
+  }
+  function screenRay(clientX, clientY) {
+    const cam = stage.camera;
+    const r = stage.canvas.getBoundingClientRect();
+    if (!r.width || !r.height)
+      return null;
+    const nx = (clientX - r.left) / r.width * 2 - 1;
+    const ny = -((clientY - r.top) / r.height * 2 - 1);
+    cam.updateMatrixWorld();
+    const o = new Vector3(), d = new Vector3();
+    if (cam.isPerspectiveCamera) {
+      o.setFromMatrixPosition(cam.matrixWorld);
+      d.set(nx, ny, 0.5).unproject(cam).sub(o).normalize();
+    } else {
+      o.set(nx, ny, -1).unproject(cam);
+      d.set(nx, ny, 1).unproject(cam).sub(o).normalize();
+    }
+    return { o, d };
+  }
+  function modelHit(clientX, clientY) {
+    const top = pickTerrain(clientX, clientY);
+    if (top)
+      return top;
+    if (!S.snap)
+      return null;
+    const ray = screenRay(clientX, clientY);
+    if (!ray || Math.abs(ray.d.z) < 1e-6)
+      return null;
+    const root = stage.content.children[0];
+    const ox = root ? root.position.x : 0;
+    const oz = root ? root.position.z : 0;
+    const zFront = MODEL.depth / 2 - S.cut * MODEL.cutMax + oz;
+    const t = (zFront - ray.o.z) / ray.d.z;
+    if (t <= 0)
+      return null;
+    const px = ray.o.x + ray.d.x * t - ox;
+    const py = ray.o.y + ray.d.y * t;
+    if (px < -MODEL.width / 2 || px > MODEL.width / 2)
+      return null;
+    const yt = sculptTopAt(S.snap, px);
+    if (yt === null || py > yt + 0.5 || py < S.snap.minBottom - 0.5)
+      return null;
+    return { x: px };
+  }
+  function pickTerrain(clientX, clientY) {
+    const ray = screenRay(clientX, clientY);
+    if (!ray || !S.snap)
+      return null;
+    const o = ray.o, d = ray.d, p = new Vector3();
+    const snap = S.snap;
+    const root = stage.content.children[0];
+    const ox = root ? root.position.x : 0;
+    const oz = root ? root.position.z : 0;
+    const zMin = -MODEL.depth / 2 + oz;
+    const zMax = MODEL.depth / 2 - S.cut * MODEL.cutMax + oz;
+    let prev = null, best = null;
+    for (let t = 4; t < 1200; t += 1) {
+      p.copy(o).addScaledVector(d, t);
+      const yt = p.z >= zMin && p.z <= zMax ? sculptTopAt(snap, p.x - ox) : null;
+      const diff = yt === null ? 1 : p.y - yt;
+      if (yt !== null && Math.abs(diff) < 2.5 && (!best || Math.abs(diff) < best.d))
+        best = { d: Math.abs(diff), x: p.x - ox };
+      if (prev !== null && prev > 0 && diff <= 0 && yt !== null) {
+        let lo = t - 1, hi = t;
+        for (let k = 0; k < 10; k++) {
+          const mid = (lo + hi) / 2;
+          p.copy(o).addScaledVector(d, mid);
+          const ym = sculptTopAt(snap, p.x - ox);
+          if (ym === null || p.y > ym)
+            lo = mid;
+          else
+            hi = mid;
+        }
+        p.copy(o).addScaledVector(d, hi);
+        return { x: p.x - ox };
+      }
+      prev = diff;
+    }
+    return best ? { x: best.x } : null;
+  }
+  function sculptPaintAt(x, total) {
+    const sc = sculptOf(S.caseId);
+    if (!sc.on || !S._sculptBase)
+      return;
+    if (!Number.isFinite(x) || !Number.isFinite(total))
+      return;
+    const base = S._sculptBase;
+    const amp = total * 0.03 * sc.strength;
+    const rad = Math.max(2, sc.radius);
+    for (let i = 0; i < XS.length; i++) {
+      const d = XS[i] - x;
+      const ad = Math.abs(d);
+      const b = +base[i] || 0;
+      if (ad > rad * 2.4) {
+        sc.delta[i] = b;
+        continue;
+      }
+      const k = Math.exp(-(d * d) / (rad * rad));
+      if (sc.erase)
+        sc.delta[i] = Math.max(-25, Math.min(25, b * (1 - Math.min(1, Math.abs(total) / 150) * k)));
+      else
+        sc.delta[i] = Math.max(-25, Math.min(25, b + amp * k));
+    }
+    S.dirty = true;
   }
   function init() {
     load();
@@ -25595,8 +25753,6 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
     });
     if (st.tab)
       setTab(st.tab);
-    if (st.id === "Rpt")
-      openReport();
     if (st.id === "R") {
       if (S.t > 0.95) {
         S.t = 0;
@@ -25605,17 +25761,6 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
       }
       S.playing = true;
     }
-    if (st.id === "Q") {
-      $("#cardQuestion").scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-    if (st.id === "P") {
-      $("#cardPredict").scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-    document.querySelectorAll(".card").forEach((c) => c.classList.remove("focus"));
-    if (st.id === "Q")
-      $("#cardQuestion").classList.add("focus");
-    if (st.id === "P")
-      $("#cardPredict").classList.add("focus");
   }
   function buildCaseList() {
     $("#caseList").innerHTML = CASES.map((c) => `
@@ -25649,8 +25794,6 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
     S.snapCmp = null;
     $("#cutRange").value = "0";
     $("#cutLabel").textContent = "\u5B8C\u6574\u5CA9\u5757";
-    $("#predictInput").value = S.preds[id] || "";
-    $("#predictSaved").textContent = S.preds[id] ? "\u5DF2\u8BB0\u5F55" : "";
     document.documentElement.style.setProperty("--accent", def.accent);
     S.accent = def.accent;
     document.querySelectorAll(".case-card").forEach((n) => n.classList.toggle("on", n.dataset.case === id));
@@ -25682,8 +25825,8 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
     const { zFront, zBack, topoAmp, isKarst, full } = o;
     const pN = { ...p, faultType: "normal" };
     const pR = { ...p, faultType: "reverse" };
-    const snapN = buildSection({ xs: XS, column: def.column, params: pN, seed: def.seed || 7 });
-    const snapR = buildSection({ xs: XS, column: def.column, params: pR, seed: def.seed || 7 });
+    const snapN = buildSection({ xs: XS, column: def.column, params: pN, seed: def.seed || 7, sculpt: sculptOf(def.id), sculptK: sculptK() });
+    const snapR = buildSection({ xs: XS, column: def.column, params: pR, seed: def.seed || 7, sculpt: sculptOf(def.id), sculptK: sculptK() });
     S.snap = snapN;
     S.snapCmp = { normal: snapN, reverse: snapR, pN, pR };
     const offX = MODEL.width * 0.56;
@@ -25732,7 +25875,7 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
     const def = caseById(S.caseId);
     const p = effectiveParams(def, S.params[S.caseId], S.t);
     S.p = p;
-    const snap = buildSection({ xs: XS, column: def.column, params: p, seed: def.seed || 7 });
+    const snap = buildSection({ xs: XS, column: def.column, params: p, seed: def.seed || 7, sculpt: sculptOf(S.caseId), sculptK: sculptK() });
     S.snap = snap;
     const { zFront, zBack } = zPlanes();
     const topoAmp = S.mode === "analysis" ? 0.25 : 0.85;
@@ -25811,7 +25954,10 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
   }
   function refreshQuestion() {
     const def = caseById(S.caseId);
-    $("#questionText").textContent = def.question;
+    const q = $("#questionText");
+    if (!q)
+      return;
+    q.textContent = def.question;
     $("#questionHint").textContent = def.hint || "";
     const vote = S.votes[def.id];
     $("#mechList").innerHTML = def.mechanisms.map((m) => `
@@ -25829,7 +25975,28 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
       refreshVerify();
       save();
     };
-    $("#predictInput").value = S.preds[S.caseId] || "";
+  }
+  function sculptK() {
+    const t = Math.max(0, Math.min(1, S.t));
+    if (t >= 0.999)
+      return 1;
+    const u = Math.max(0, Math.min(1, (t - 0.88) / 0.12));
+    return u * u * (3 - 2 * u);
+  }
+  function sculptMaxMeters() {
+    const sc = sculptOf(S.caseId);
+    let m = 0;
+    for (let i = 0; i < sc.delta.length; i++)
+      m = Math.max(m, Math.abs(+sc.delta[i] || 0));
+    return m * 10;
+  }
+  function syncSculptBtn() {
+    const b = $("#btnSculpt");
+    if (!b)
+      return;
+    const on = !!sculptOf(S.caseId).on;
+    b.classList.toggle("on", on);
+    b.textContent = on ? (sculptOf(S.caseId).erase ? "\u5851\u5F62\uFF1A\u5F00\xB7\u6A61\u76AE" : "\u5851\u5F62\uFF1A\u5F00") : "\u5851\u5F62\uFF1A\u5173";
   }
   function refreshParams() {
     const def = caseById(S.caseId);
@@ -25853,6 +26020,24 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
       return "";
     }).join("");
     const limited = S.snap && S.snap.fold.limited;
+    const sc = sculptOf(S.caseId);
+    const sculptPanel = `
+    <div class="grp-title" style="display:flex;justify-content:space-between;align-items:center">\u5730\u5F62\u5851\u5F62\xB7v3
+      <button class="mini-btn ghost" id="btnSculptClear" style="padding:2px 8px;font-size:9.5px">\u6E05\u96F6</button></div>
+    <div class="modeswitch" style="margin-bottom:8px;width:100%" id="sculptMode">
+      <button data-sm="surface" style="flex:1" class="${sc.mode === "surface" ? "on" : ""}">\u53EA\u6539\u5730\u8868</button>
+      <button data-sm="whole" style="flex:1" class="${sc.mode === "whole" ? "on" : ""}">\u6574\u4F53\u5347\u964D</button>
+    </div>
+    <div class="modeswitch" style="margin-bottom:8px;width:100%" id="sculptToggle">
+      <button style="flex:1" class="${sc.on ? "on" : ""}" data-son="1">${sc.on ? "\u5851\u5F62\u5DF2\u5F00" : "\u5851\u5F62\u5DF2\u5173"}</button>
+      <button style="flex:1" class="${sc.erase ? "on" : ""}" data-serase="1">${sc.erase ? "\u6A61\u76AE\uFF08\u64E6\u9664\uFF09" : "\u7B14\u5237\uFF08\u62AC\u538B\uFF09"}</button>
+    </div>
+    <div class="ctl" id="sculptStrength"><div class="ctl-head"><span>\u7B14\u5237\u5F3A\u5EA6</span><b>\xD7${sc.strength.toFixed(1)}</b></div>
+      <input type="range" min="0.2" max="3" step="0.1" value="${sc.strength}"></div>
+    <div class="ctl" id="sculptRadius"><div class="ctl-head"><span>\u7B14\u5237\u534A\u5F84</span><b>${(sc.radius * 10).toFixed(0)} m</b></div>
+      <input type="range" min="3" max="40" step="1" value="${sc.radius}"></div>
+    <div class="hint">\u5F53\u524D\u6700\u5927\u8D77\u4F0F\uFF1A<b>${sculptMaxMeters().toFixed(0)} m</b>\uFF08\u4EC5\u4F5C\u7528\u4E8E\u65F6\u95F4\u8F74 100% \u7684\u6700\u7EC8\u5F62\u6001\uFF09</div>
+    <div class="hint">\u5728\u4E09\u7EF4\u533A<b>\u5355\u51FB\u5730\u8868\u5C0F\u5E45\u62AC\u5347</b>\uFF0C<b>\u6309\u4F4F\u5411\u4E0A\u62D6\u62AC\u5347\u3001\u5411\u4E0B\u62D6\u538B\u4F4E</b>\uFF08\u7A7A\u767D\u5904\u62D6\u52A8\u4ECD\u662F\u65CB\u8F6C\u89C6\u89D2\uFF09\u3002\u70B9\u300C\u590D\u539F\u300D\u540E\u624B\u634F\u4F1A\u81EA\u52A8\u6DE1\u51FA\uFF0C\u5B8C\u5168\u6309\u53C2\u6570\u89C4\u5219\u91CD\u5EFA\u3002</div>`;
     const readout = `
     <div class="readout">
       <div class="r"><span>\u8BF7\u6C42\u7F29\u77ED\u7387</span><b>${(p.shorten * 100).toFixed(1)}%</b></div>
@@ -25865,7 +26050,7 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
     <div class="hint">\u6A21\u578B\u4E3A<b>\u51E0\u4F55\u8FD0\u52A8\u5B66\u590D\u539F</b>\uFF1A\u5C42\u9762\u6CBF\u4E2D\u9762\u6CD5\u5411\u7B49\u8DDD\u504F\u79FB\uFF0C\u5782\u76F4\u5C42\u9762\u539A\u5EA6\u4E25\u683C\u5B88\u6052\uFF1B\u5E95\u90E8\u6ED1\u8131\u5C42\u4EE5\u5851\u6027\u6D41\u52A8\u534F\u8C03\u8936\u76B1\u7684\u5411\u4E0B\u6536\u655B\u3002</div>
   `;
     $("#tabBody").innerHTML = S.tab === "params" ? `<div class="grp-title" style="display:flex;justify-content:space-between;align-items:center">\u6784\u9020\u53C2\u6570
-         <button class="mini-btn ghost" id="btnResetParams" style="padding:2px 8px;font-size:9.5px">\u6062\u590D\u9ED8\u8BA4</button></div>${ctrls}${extra}${readout}` : S.tab === "evidence" ? evidenceHtml() : verifyHtml();
+         <button class="mini-btn ghost" id="btnResetParams" style="padding:2px 8px;font-size:9.5px">\u6062\u590D\u9ED8\u8BA4</button></div>${ctrls}${extra}${sculptPanel}${readout}` : S.tab === "evidence" ? evidenceHtml() : verifyHtml();
     if (S.tab === "params") {
       $("#tabBody").querySelectorAll(".ctl[data-key]").forEach((box) => {
         const key = box.dataset.key;
@@ -25921,7 +26106,63 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
           refreshVerify();
           save();
         };
+      const sm = $("#sculptMode");
+      if (sm)
+        sm.onclick = (e) => {
+          const b = e.target.closest("[data-sm]");
+          if (!b)
+            return;
+          sc.mode = b.dataset.sm;
+          S.dirty = true;
+          refreshParams();
+          save();
+        };
+      const stg = $("#sculptToggle");
+      if (stg)
+        stg.onclick = (e) => {
+          if (e.target.closest("[data-son]")) {
+            sc.on = !sc.on;
+            S.dirty = true;
+            refreshParams();
+            save();
+            return;
+          }
+          if (e.target.closest("[data-serase]")) {
+            sc.erase = !sc.erase;
+            refreshParams();
+            save();
+          }
+        };
+      const clearSculpt = $("#btnSculptClear");
+      if (clearSculpt)
+        clearSculpt.onclick = () => {
+          sc.delta = new Array(XS.length).fill(0);
+          S.dirty = true;
+          refreshParams();
+          save();
+        };
+      const ssBox = $("#sculptStrength");
+      if (ssBox) {
+        const inp = ssBox.querySelector("input");
+        const val = ssBox.querySelector("b");
+        inp.addEventListener("input", () => {
+          sc.strength = parseFloat(inp.value);
+          val.textContent = "\xD7" + sc.strength.toFixed(1);
+        });
+        inp.addEventListener("change", save);
+      }
+      const srBox = $("#sculptRadius");
+      if (srBox) {
+        const inp = srBox.querySelector("input");
+        const val = srBox.querySelector("b");
+        inp.addEventListener("input", () => {
+          sc.radius = parseFloat(inp.value);
+          val.textContent = (sc.radius * 10).toFixed(0) + " m";
+        });
+        inp.addEventListener("change", save);
+      }
     }
+    syncSculptBtn();
   }
   var evalTimer = null;
   function scheduleEvaluate() {
@@ -26377,6 +26618,10 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
       cut: +S.cut.toFixed(3),
       cutMeters: +(S.cut * MODEL.cutMax * MODEL.unitMeters).toFixed(0),
       params: { ...S.params[S.caseId] },
+      sculpt: (() => {
+        const s = sculptOf(S.caseId);
+        return { on: s.on, mode: s.mode, strength: s.strength, radius: s.radius, delta: s.delta.map((v) => +v.toFixed(3)) };
+      })(),
       sectionPin: pin,
       focusedLayer: S.focusLayer
     };
@@ -26429,6 +26674,126 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
       b.classList.toggle("on", S.showForces);
     S.dirty = true;
     rebuild(false);
+  }
+  function bindSculpt() {
+    const el = $("#scene");
+    if (!el)
+      return;
+    const tip = document.createElement("div");
+    tip.id = "sculptTip";
+    tip.style.cssText = "position:fixed;left:0;top:0;z-index:60;pointer-events:none;padding:4px 10px;border-radius:20px;background:rgba(14,18,24,.86);border:1px solid rgba(255,255,255,.16);color:#eaf2ff;font:12px/1.4 system-ui,-apple-system,sans-serif;transform:translate(-50%,-150%);display:none;white-space:nowrap";
+    document.body.appendChild(tip);
+    let tipTimer = 0;
+    const moveTip = (x, y) => {
+      tip.style.left = x + "px";
+      tip.style.top = y + "px";
+    };
+    const onCanvas = (t) => t === el || !!(t && el.contains(t));
+    const endDrag = (e) => {
+      if (!S._sculpting)
+        return;
+      S._sculpting = false;
+      if (S._sculptBase && (S._sculptMoved || 0) < 4) {
+        try {
+          sculptPaintAt(S._sculptX, 40);
+        } catch (err) {
+        }
+      }
+      S._sculptBase = null;
+      stage.controls.enabled = true;
+      el.style.cursor = "";
+      clearTimeout(tipTimer);
+      tipTimer = setTimeout(() => {
+        tip.style.display = "none";
+      }, 450);
+      save();
+      if (S.tab === "params")
+        refreshParams();
+      if (e && e.pointerId != null) {
+        try {
+          el.releasePointerCapture(e.pointerId);
+        } catch (err) {
+        }
+      }
+    };
+    // 捕获阶段拦在 window 上：先于 OrbitControls 拿到 pointerdown；没点中地表则放行给相机
+    window.addEventListener("pointerdown", (e) => {
+      if (e.button !== 0 || S.compare || !onCanvas(e.target))
+        return;
+      if (!sculptOf(S.caseId).on)
+        return;
+      const hit = modelHit(e.clientX, e.clientY);
+      if (!hit)
+        return;
+      const sc0 = sculptOf(S.caseId);
+      if (S.t < 0.999) {
+        S.t = 1;
+        S.playing = false;
+        S.dirty = true;
+        updateTimelineUi();
+      }
+      S._sculpting = true;
+      S._sculptBase = sc0.delta.slice();
+      S._sculptX = hit.x;
+      S._sculptY0 = e.clientY;
+      S._sculptLastY = e.clientY;
+      S._sculptStartX = e.clientX;
+      S._sculptMoved = 0;
+      stage.controls.enabled = false;
+      el.style.cursor = "ns-resize";
+      clearTimeout(tipTimer);
+      moveTip(e.clientX, e.clientY);
+      tip.textContent = "\u5851\u5F62\u4E2D\uFF1A\u5411\u4E0A\u62AC\u5347 / \u5411\u4E0B\u538B\u4F4E";
+      tip.style.display = "block";
+      try {
+        el.setPointerCapture(e.pointerId);
+      } catch (err) {
+      }
+      e.stopPropagation();
+      e.preventDefault();
+    }, true);
+    window.addEventListener("pointermove", (e) => {
+      if (!S._sculpting) {
+        if (onCanvas(e.target))
+          el.style.cursor = S.compare ? "" : sculptOf(S.caseId).on ? "ns-resize" : "";
+        return;
+      }
+      const total = S._sculptY0 - e.clientY;
+      S._sculptMoved = Math.max(S._sculptMoved || 0, Math.abs(e.clientX - S._sculptStartX) + Math.abs(e.clientY - S._sculptY0));
+      let errMsg = "";
+      try {
+        sculptPaintAt(S._sculptX, total);
+      } catch (err) {
+        errMsg = " | \u51FA\u9519\uFF1A" + err.message;
+      }
+      moveTip(e.clientX, e.clientY);
+      if (Math.abs(total) >= 2) {
+        const sc = sculptOf(S.caseId);
+        const wantM = Math.abs(total * 0.03 * sc.strength) * 10;
+        const modeTxt = sc.erase ? "\u6A61\u76AE" : total > 0 ? "\u62AC\u5347" : "\u538B\u4F4E";
+        tip.textContent = modeTxt + " " + wantM.toFixed(0) + " m \xB7 \u8D77\u4F0F " + sculptMaxMeters().toFixed(0) + " m" + errMsg;
+        tip.style.display = "block";
+      }
+      e.stopPropagation();
+      e.preventDefault();
+    }, true);
+    window.addEventListener("pointerup", endDrag, true);
+    window.addEventListener("pointercancel", endDrag, true);
+    window.addEventListener("wheel", (e) => {
+      if (!e.shiftKey || S.compare || !onCanvas(e.target))
+        return;
+      e.preventDefault();
+      e.stopPropagation();
+      const s = sculptOf(S.caseId);
+      s.radius = Math.max(3, Math.min(40, s.radius + (e.deltaY > 0 ? 2 : -2)));
+      if (S.tab === "params")
+        refreshParams();
+      save();
+    }, { capture: true, passive: false });
+    window.addEventListener("keyup", (e) => {
+      if (e.key === "Shift")
+        el.style.cursor = "";
+    });
   }
   function bindKeys() {
     window.addEventListener("keydown", (e) => {
@@ -26492,6 +26857,13 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
     applyRail(S.railHidden);
     $("#btnForces").onclick = () => toggleForces();
     document.getElementById("btnForces").classList.toggle("on", S.showForces);
+    $("#btnSculpt").onclick = () => {
+      const s = sculptOf(S.caseId);
+      s.on = !s.on;
+      S.dirty = true;
+      refreshParams();
+      save();
+    };
     $("#speedCtl").onclick = (e) => {
       const b = e.target.closest("[data-sp]");
       if (!b)
@@ -26523,21 +26895,13 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
         document.getElementById("exportMenu").classList.remove("on");
     });
     bindSectionProbe();
+    bindSculpt();
     bindKeys();
     document.querySelectorAll("#tabs button").forEach((b) => {
       b.onclick = () => {
         setTab(b.dataset.tab);
       };
     });
-    $("#btnPredictSave").onclick = () => {
-      const v = $("#predictInput").value.trim().slice(0, PRED_MAX);
-      S.preds[S.caseId] = v;
-      $("#predictSaved").textContent = v ? "\u5DF2\u8BB0\u5F55 \u2713" : "";
-      if (v) {
-        setTab("params");
-      }
-      save();
-    };
     $("#modeSwitch").onclick = (e) => {
       const b = e.target.closest("[data-mode]");
       if (!b)
@@ -26589,21 +26953,12 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
       S.dirty = true;
       refreshHud();
     };
-    $(".viewtools").onclick = (e) => {
-      const b = e.target.closest("[data-view]");
-      if (!b)
-        return;
-      setView(b.dataset.view);
-    };
     $("#btnStripToggle").onclick = (e) => {
       S.stripOpen = !S.stripOpen;
       $(".strip").classList.toggle("collapsed", !S.stripOpen);
       e.target.textContent = S.stripOpen ? "\u6536\u8D77" : "\u5C55\u5F00";
       if (S.stripOpen)
         setTimeout(drawStrip, 60);
-    };
-    $("#btnReport").onclick = () => {
-      setStep(5);
     };
     $("#modalClose").onclick = () => $("#modal").classList.remove("on");
     $("#modal").addEventListener("click", (e) => {
