@@ -21017,12 +21017,12 @@ textarea::placeholder{color:var(--faint);}
     C("karst", 3.4)
   ];
   var unconformityCol = [
-    C("karst", 3.2, { group: "lower" }),
-    C("karst", 4.2, { group: "lower" }),
-    C("karst", 3.0, { group: "lower" }),
-    C("dolomiteKarst", 3.6, { group: "upper" }),
-    C("dolomiteKarst", 4.4, { group: "upper" }),
-    C("dolomiteKarst", 3.2, { group: "upper" })
+    C("dolomiteKarst", 3.2, { group: "lower" }),
+    C("dolomiteKarst", 4.2, { group: "lower" }),
+    C("dolomiteKarst", 3.0, { group: "lower" }),
+    C("karst", 3.6, { group: "upper" }),
+    C("karst", 4.4, { group: "upper" }),
+    C("karst", 3.2, { group: "upper" })
   ];
   var CASES = [
     {
@@ -21197,33 +21197,36 @@ textarea::placeholder{color:var(--faint);}
     {
       id: "unconformity",
       no: "03",
-      title: "\u5E73\u884C\u6574\u5408 \xB7 \u6C9F\u5729\u5C71",
-      en: "PARALLEL CONFORMITY",
-      subtitle: "\u4E0B\u90E8\u5CA9\u5173\u7EC4\u7070\u5CA9\u3001\u4E0A\u90E8\u5927\u5858\u7EC4\u767D\u4E91\u5CA9\uFF0C\u4E24\u5957\u5730\u5C42\u540C\u5411\u503E\u659C\u6210\u9AA4\u574E",
+      title: "构造沉降 · 沉积相变 · 江圩山",
+      en: "SUBSIDENCE & FACIES CHANGE",
+      subtitle: "下部白云岩（局限台地—潮坪）、上部灰岩（开阔浅海），短暂沉降使水体加深、沉积环境改变",
       accent: "#e8eef2",
-      question: "\u6C9F\u5729\u5C71\u5761\u9762\u4E2D\u90E8\u88AB\u4FB5\u8680\u5207\u5F00\uFF0C\u5207\u53E3\u4E24\u4FA7\u540C\u65F6\u51FA\u9732\u4E0A\u90E8\u5927\u5858\u7EC4\u767D\u4E91\u5CA9\u4E0E\u4E0B\u90E8\u5CA9\u5173\u7EC4\u7070\u5CA9\u3002\u8FD9\u4E24\u5957\u5730\u5C42\u662F\u6574\u5408\u3001\u5E73\u884C\u4E0D\u6574\u5408\uFF0C\u8FD8\u662F\u89D2\u5EA6\u4E0D\u6574\u5408\uFF1F",
-      hint: '\u6CE8\u610F\u4E09\u6761\u7EBF\u7D22\uFF1A\u4E0A\u4E0B\u4EA7\u72B6\u5DEE\u3001\u63A5\u89E6\u9762\u9644\u8FD1\u662F\u5426\u6709\u5E95\u783E\u5CA9\u4E0E\u53E4\u98CE\u5316\u58F3\u3001\u4EE5\u53CA\u5730\u5C42\u67F1\u662F\u5426\u8FDE\u7EED\u3002',
+      question: "江圩山下部为白云岩、上部为灰岩，两套地层整合接触。为什么一次短暂的构造沉降，会让同一片海域先后沉积出两套完全不同的地层？",
+      hint: '先看接触关系，再看岩性变化：上下产状一致、无底砾岩，说明沉积是连续的；白云岩→灰岩的突变，要用<b>构造沉降 → 水体加深、循环变好</b>来解释，而不是剥蚀间断。',
       mechanisms: [
-        { id: "m1", label: "\u5E73\u884C\u6574\u5408 \xB7 \u4EA7\u72B6\u4E00\u81F4\u3001\u5C42\u5E8F\u8FDE\u7EED", desc: "\u6CA1\u6709\u62AC\u5347\u5265\u8680\uFF0C\u4E0A\u4E0B\u5730\u5C42\u8FDE\u7EED\u6C89\u79EF", right: true },
-        { id: "m2", label: "\u5E73\u884C\u4E0D\u6574\u5408 \xB7 \u7F3A\u5931\u4F46\u4EA7\u72B6\u5E73\u884C", desc: "\u6574\u4F53\u62AC\u5347\u5265\u8680\u540E\u91CD\u65B0\u6C89\u964D\uFF0C\u4E0A\u4E0B\u4EA7\u72B6\u8FD1\u4E4E\u4E00\u81F4", right: false },
-        { id: "m3", label: "\u89D2\u5EA6\u4E0D\u6574\u5408 \xB7 \u8936\u76B1\u2192\u5265\u8680\u2192\u518D\u6C89\u79EF", desc: "\u4E0B\u4F0F\u5C42\u53D8\u5F62\u540E\u62AC\u5347\u5265\u8680\uFF0C\u4E0E\u4E0A\u8986\u5C42\u659C\u4EA4", right: false },
-        { id: "m4", label: "\u65AD\u5C42\u63A5\u89E6 \xB7 \u6784\u9020\u9762", desc: "\u4E24\u5957\u5730\u5C42\u6CBF\u65AD\u5C42\u9762\u76F4\u63A5\u63A5\u89E6", right: false }
+        { id: "m1", label: "构造沉降 · 沉积环境演变", desc: "短暂沉降使水体加深、循环变好：白云岩→灰岩，层序连续", right: true },
+        { id: "m2", label: "角度不整合 · 褶皱剥蚀后再沉积", desc: "上下产状应明显斜交，本露头并不符合", right: false },
+        { id: "m3", label: "断层接触 · 构造拼接", desc: "两套地层沿断面接触，应有角砾岩与擦痕", right: false },
+        { id: "m4", label: "岩浆侵入 · 接触变质分异", desc: "需见侵入体或接触变质带，剖面内未出现", right: false }
       ],
       column: unconformityCol,
       defaults: {
-        shorten: 0.02,
+        shorten: 0,
         wavelength: 95,
         phaseX: 0,
         sign: 1,
-        tilt: 4,
+        tilt: 6,
         tiltScale: 0.35,
-        erodeDepth: 0,
-        erodeRelief: 0,
-        karstDepth: 1.8,
-        windowDepth: 0,
-        windowX: 0,
-        windowW: 12,
+        tiltDir: -1,
+        uplift: 0,
+        subsidence: 10,
+        baseDeposit: 1,
         deposit: 1,
+        sea: 0,
+        seaLevel: 22.2,
+        erodeDepth: 7.5,
+        erodeRelief: 0.6,
+        karstDepth: 1.8,
         basementThickness: 6,
         faultSlip: 0,
         faultMaxSlip: 5,
@@ -21234,43 +21237,45 @@ textarea::placeholder{color:var(--faint);}
         faultDragW: 5
       },
       controls: [
-        { key: "tilt", label: "\u5730\u5C42\u503E\u89D2", min: 0, max: 40, step: 1, fmt: (v) => v.toFixed(0) + "\xB0" },
-        { key: "tiltScale", label: "\u5761\u9762\u9661\u5EA6", min: 0.3, max: 1.2, step: 0.05, fmt: (v) => v.toFixed(2) },
-        { key: "windowDepth", label: "\u4E2D\u90E8\u5207\u53E3\u6DF1\u5EA6", min: 0, max: 24, step: 0.5, fmt: (v) => (v * 10).toFixed(0) + " m" },
-        { key: "erodeDepth", label: "\u5265\u8680\u6DF1\u5EA6", min: 0, max: 32, step: 0.1, fmt: (v) => (v * 10).toFixed(0) + " m" },
-        { key: "erodeRelief", label: "\u53E4\u4FB5\u8680\u9762\u8D77\u4F0F", min: 0, max: 3.5, step: 0.1, fmt: (v) => (v * 10).toFixed(0) + " m" },
-        { key: "shorten", label: "\u4E0B\u4F0F\u5C42\u7F29\u77ED\u7387", min: 0, max: 0.28, step: 5e-3, fmt: (v) => (v * 100).toFixed(1) + "%" }
+        { key: "baseDeposit", label: "下部白云岩沉积比例", min: 0, max: 1, step: 0.01, fmt: (v) => (v * 100).toFixed(0) + "%" },
+        { key: "deposit", label: "上部灰岩沉积比例", min: 0, max: 1, step: 0.01, fmt: (v) => (v * 100).toFixed(0) + "%" },
+        { key: "subsidence", label: "短暂沉降幅度", min: 0, max: 14, step: 0.5, fmt: (v) => (v * 10).toFixed(0) + " m" },
+        { key: "sea", label: "海水覆盖", min: 0, max: 1, step: 0.01, fmt: (v) => (v * 100).toFixed(0) + "%" },
+        { key: "tilt", label: "后期地层倾角", min: 0, max: 40, step: 1, fmt: (v) => v.toFixed(0) + "\xB0" },
+        { key: "erodeDepth", label: "后期剥蚀深度", min: 0, max: 32, step: 0.1, fmt: (v) => (v * 10).toFixed(0) + " m" }
       ],
       keyframes: [
-        { t: 0, label: "\u2460 \u6574\u4F53\u6C89\u79EF", note: "\u4E0B\u90E8\u5CA9\u5173\u7EC4\u7070\u5CA9\u6C89\u79EF\u540E\uFF0C\u4E0A\u90E8\u5927\u5858\u7EC4\u767D\u4E91\u5CA9\u8FDE\u7EED\u8986\u76D6\uFF0C\u4EA7\u72B6\u4E00\u81F4", p: { deposit: 1, tilt: 0, windowDepth: 0, shorten: 0, erodeDepth: 0, erodeRelief: 0 } },
-        { t: 0.22, label: "\u2461 \u4FA7\u5411\u6324\u538B", note: "\u53D7\u6324\u538B\u5F00\u59CB\u88AB\u52A8\u5F2F\u66F2\uFF0C\u672C\u9732\u5934\u4F4D\u4E8E\u80CC\u659C\u53F3\u7FFC", p: { tilt: 4, windowDepth: 0, shorten: 0.06 } },
-        { t: 0.45, label: "\u2462 \u8936\u76B1\u4E0E\u503E\u659C\u5B9A\u578B", note: "\u53F3\u7FFC\u5730\u5C42\u503E\u5411 179\xB0\u222035\xB0\u3001188\xB0\u222023\xB0\uFF0C\u4E24\u5957\u5730\u5C42\u4EA7\u72B6\u4E00\u81F4", p: { tilt: 4, windowDepth: 0, shorten: 0.1 } },
-        { t: 0.72, label: "\u2463 \u62AC\u5347\u4E0E\u5265\u8680", note: "\u80CC\u659C\u9686\u8D77\uFF0C\u5265\u8680\u9762\u9010\u5C42\u4E0B\u5207\uFF0C\u4E0A\u8986\u767D\u4E91\u5CA9\u9010\u6E10\u53D8\u8584", p: { tilt: 4, shorten: 0.12, erodeDepth: 8, erodeRelief: 0.5 } },
-        { t: 1, label: "\u2464 \u4E24\u5957\u5730\u5C42\u51FA\u9732\u5B9A\u578B", note: "\u6838\u90E8\u62B1\u66F2\u5904\u4E0A\u8986\u767D\u4E91\u5CA9\u5C16\u706D\u53D8\u8584\u3001\u4E0B\u4F0F\u7070\u5CA9\u53D8\u539A\uFF0C\u4E24\u5957\u5730\u5C42\u7684\u4EA4\u7EBF\u5728\u6838\u90E8\u51FA\u9732", p: { tilt: 4, shorten: 0.12, erodeDepth: 11.2, erodeRelief: 0.6 } }
+        { t: 0, label: "① 一片海洋 · 尚无沉积", note: "海面之下还没有地层，沉积刚刚开始", p: { baseDeposit: 0, deposit: 0, subsidence: 0, sea: 1, tilt: 0, erodeDepth: 0 } },
+        { t: 0.22, label: "② 白云岩沉积 · 局限台地", note: "温暖浅海、水体局限，沉积下部白云岩", p: { baseDeposit: 1, deposit: 0, subsidence: 0, sea: 1, tilt: 0, erodeDepth: 0 } },
+        { t: 0.42, label: "③ 短暂沉降 · 水体加深", note: "地壳短暂下降，海水变深、循环变好", p: { baseDeposit: 1, deposit: 0, subsidence: 5, sea: 1, tilt: 0, erodeDepth: 0 } },
+        { t: 0.64, label: "④ 灰岩沉积 · 开阔浅海", note: "水体加深后沉积上部灰岩，与下伏白云岩整合接触", p: { baseDeposit: 1, deposit: 1, subsidence: 10, sea: 1, tilt: 0, erodeDepth: 0 } },
+        { t: 0.84, label: "⑤ 抬升成陆 · 海水退出", note: "两套地层一起抬升、轻微倾斜，海水退出", p: { baseDeposit: 1, deposit: 1, subsidence: 10, sea: 0, tilt: 6, erodeDepth: 0 } },
+        { t: 1, label: "⑥ 剥蚀出露 · 上灰岩下白云岩", note: "后期剥蚀切开，地表同时出露上部灰岩与下部白云岩", p: { baseDeposit: 1, deposit: 1, subsidence: 10, sea: 0, tilt: 6, erodeDepth: 7.5 } }
       ],
       evidence: [
-        { k: "\u4E0B\u90E8\u7070\u5CA9\uFF08\u5CA9\u5173\u7EC4\uFF09\u4EA7\u72B6", v: "\u503E\u5411 171\xB0\u222043\xB0\uFF08\u8D70\u5411 81\xB0/261\xB0\uFF09\u3001107\xB0\u222018\xB0\uFF0817\xB0/197\xB0\uFF09\u3001198\xB0\u222041\xB0\uFF08108\xB0/288\xB0\uFF09", kind: "measured", src: "\u6C9F\u5729\u5C71\u7F57\u76D8\u5B9E\u6D4B\uFF082026-10-29\uFF09" },
-        { k: "\u4E0A\u90E8\u767D\u4E91\u5CA9\uFF08\u5927\u5858\u7EC4\uFF09\u4EA7\u72B6", v: "\u503E\u5411 179\xB0\u222035\xB0\uFF0889\xB0/269\xB0\uFF09\u3001154\xB0\u222052\xB0\uFF0864\xB0/244\xB0\uFF09\u3001188\xB0\u222023\xB0\uFF0898\xB0/278\xB0\uFF09", kind: "measured", src: "\u6C9F\u5729\u5C71\u7F57\u76D8\u5B9E\u6D4B" },
-        { k: "\u63A5\u89E6\u9762\u5F62\u6001", v: "\u4E0A\u4E0B\u4EA7\u72B6\u8FD1\u5E73\u884C\uFF0C\u89D2\u5EA6\u5DEE < 10\xB0\uFF0C\u65E0\u5DEE\u5F02\u5265\u8680", kind: "measured", src: "\u7F57\u76D8\u5B9E\u6D4B" },
-        { k: "\u5E95\u783E\u5CA9", v: "\u63A5\u89E6\u9762\u4E0A\u4E0B\u5747\u4E3A\u78B3\u9178\u76D0\u5CA9\uFF0C\u672A\u89C1\u783E\u5CA9\u6216\u53E4\u98CE\u5316\u58F3", kind: "measured", src: "\u9732\u5934\u89C2\u5BDF" },
-        { k: "\u5C42\u5E8F\u8FDE\u7EED\u6027", v: "\u5CA9\u5173\u7EC4\u4E0E\u5927\u5858\u7EC4\u8FDE\u7EED\u63A5\u89E6\uFF0C\u672A\u89C1\u7F3A\u5931\u5C42\u4F4D", kind: "derived", src: "\u5256\u9762\u5224\u8BFB" },
-        { k: "\u6784\u9020\u9762\u7279\u5F81", v: "\u63A5\u89E6\u9762\u9644\u8FD1\u65E0\u65AD\u5C42\u89D2\u783E\u5CA9\u3001\u65E0\u64E6\u75D5\u3001\u65E0\u7275\u5F15", kind: "measured", src: "\u9732\u5934\u89C2\u5BDF" }
+        { k: "下部白云岩产状", v: "倾向 171°∠43°（走向 81°/261°）、107°∠18°（17°/197°）、198°∠41°（108°/288°）", kind: "measured", src: "江圩山罗盘实测（2026-10-29）" },
+        { k: "上部灰岩产状", v: "倾向 179°∠35°（89°/269°）、154°∠52°（64°/244°）、188°∠23°（98°/278°）", kind: "measured", src: "江圩山罗盘实测" },
+        { k: "接触关系", v: "上下产状近平行，角度差 < 10°，无差异剥蚀，属整合接触", kind: "measured", src: "罗盘实测" },
+        { k: "底砾岩与风化壳", v: "接触面上下均为碳酸盐岩，未见底砾岩或古风化壳，无长期剥蚀间断证据", kind: "measured", src: "露头观察" },
+        { k: "岩性突变的环境意义", v: "白云岩→灰岩指示水体由局限台地/潮坪转为开阔浅海，与短暂构造沉降、水体加深相符", kind: "derived", src: "岩性对比与沉积相分析" },
+        { k: "构造面特征", v: "接触面附近无断层角砾岩、无擦痕、无牵引，排除断层拼接", kind: "measured", src: "露头观察" }
       ],
       predictions: [
         {
           id: "p1",
-          text: "\u82E5\u4E3A\u5E73\u884C\u4E0D\u6574\u5408\uFF0C\u4E0A\u4E0B\u4E24\u5957\u5730\u5C42\u7684\u4EA7\u72B6\u5E94\u8FD1\u4E4E\u5E73\u884C\uFF08\u5DEE < 10\xB0\uFF09",
-          check: (m) => m.unc.discordance < 10 ? { state: "match", note: `\u4E0B\u4F0F\u5C42 ${m.unc.dipLower.toFixed(0)}\xB0 / \u4E0A\u8986\u5C42 ${m.unc.dipUpper.toFixed(1)}\xB0\uFF0C\u5DEE ${m.unc.discordance.toFixed(1)}\xB0\u2014\u2014\u4EA7\u72B6\u5E73\u884C` } : { state: "conflict", note: `\u4EA7\u72B6\u5DEE ${m.unc.discordance.toFixed(1)}\xB0\uFF0C\u63A5\u8FD1\u89D2\u5EA6\u4E0D\u6574\u5408` }
+          text: "若为构造沉降导致的沉积环境变化，上下两套地层应整合接触、产状一致（差 < 10°）",
+          check: (m) => m.unc.discordance < 10 ? { state: "match", note: `下部 ${m.unc.dipLower.toFixed(0)}° / 上部 ${m.unc.dipUpper.toFixed(1)}°，差 ${m.unc.discordance.toFixed(1)}°——整合接触，支持“同一构造背景下环境演变”` } : { state: "conflict", note: `产状差 ${m.unc.discordance.toFixed(1)}°，上下明显斜交，需先考虑角度不整合` }
         },
         {
           id: "p2",
-          text: "\u82E5\u4E3A\u6574\u5408\u63A5\u89E6\uFF0C\u63A5\u89E6\u9762\u9644\u8FD1\u4E0D\u5E94\u51FA\u73B0\u5E95\u783E\u5CA9\u6216\u53E4\u98CE\u5316\u58F3",
-          check: (m) => !m.unc.hasBasalConglomerate ? { state: "match", note: "\u63A5\u89E6\u9762\u4E0A\u4E0B\u5747\u4E3A\u78B3\u9178\u76D0\u5CA9\uFF0C\u65E0\u783E\u5CA9\u3001\u65E0\u98CE\u5316\u58F3\u2014\u2014\u6CA1\u6709\u5265\u8680\u95F4\u65AD\u7684\u7269\u8D28\u8BC1\u636E" } : { state: "conflict", note: "\u89C1\u5E95\u783E\u5CA9\uFF0C\u8BF4\u660E\u5B58\u5728\u5265\u8680\u95F4\u65AD\uFF0C\u4E0E\u6574\u5408\u63A5\u89E6\u77DB\u76FE" }
+          text: "若岩性突变由环境变化造成，接触面应无底砾岩、无古风化壳，层序连续",
+          check: (m) => (!m.unc.hasBasalConglomerate && m.unc.missingLayers === 0) ? { state: "match", note: "无底砾岩、无风化壳、无缺失层位——岩性变化不是剥蚀间断造成，而是沉积环境改变" } : { state: "conflict", note: `见剥蚀间断证据（缺失 ${m.unc.missingLayers} 个层位），需重新评估沉积间断` }
         },
         {
           id: "p3",
-          text: "\u82E5\u4E3A\u6574\u5408\uFF0C\u5730\u5C42\u67F1\u5E94\u8FDE\u7EED\u3001\u65E0\u7F3A\u5931\u5C42\u4F4D",
-          check: (m) => m.unc.missingLayers === 0 ? { state: "match", note: "\u5256\u9762\u4E2D\u5404\u5C42\u5747\u8FDE\u7EED\u51FA\u73B0\uFF0C\u65E0\u7F3A\u5931\u2014\u2014\u6C89\u79EF\u4F5C\u7528\u672A\u4E2D\u65AD" } : { state: "conflict", note: `\u5256\u9762\u4E2D\u7F3A\u5931 ${m.unc.missingLayers} \u4E2A\u5C42\u4F4D\uFF0C\u4E0E\u6574\u5408\u63A5\u89E6\u77DB\u76FE` }
+          role: "rival",
+          text: "若为角度不整合，下伏地层应先褶皱剥蚀，上下产状明显斜交（差 > 10°）",
+          check: (m) => m.unc.discordance > 10 ? { state: "match", note: `产状差 ${m.unc.discordance.toFixed(1)}°，支持角度不整合` } : { state: "conflict", note: `产状差仅 ${m.unc.discordance.toFixed(1)}°，上下近平行——角度不整合假说被排除` }
         },
         {
           id: "p4",
@@ -21280,9 +21285,9 @@ textarea::placeholder{color:var(--faint);}
         }
       ],
       verdict: {
-        keep: ["\u4E0A\u4E0B\u4EA7\u72B6\u8FD1\u4E4E\u4E00\u81F4\uFF08\u5DEE < 10\xB0\uFF09\uFF0C\u65E0\u89D2\u5EA6\u4E0D\u6574\u5408", "\u63A5\u89E6\u9762\u65E0\u5E95\u783E\u5CA9\u3001\u65E0\u53E4\u98CE\u5316\u58F3\uFF0C\u65E0\u5265\u8680\u95F4\u65AD", "\u5730\u5C42\u67F1\u8FDE\u7EED\uFF0C\u65E0\u7F3A\u5931\u5C42\u4F4D\u2014\u2014\u6C89\u79EF\u4F5C\u7528\u672A\u4E2D\u65AD"],
-        cannot: ["\u5355\u51ED\u91CE\u5916\u63A5\u89E6\u5173\u7CFB\u65E0\u6CD5\u786E\u5B9A\u7EDD\u5BF9\u5E74\u9F84\uFF08\u9700\u53E4\u751F\u7269\u4E0E\u6D4B\u5E74\u8BC1\u636E\uFF09", "\u65E0\u6CD5\u6392\u9664\u66F4\u9AD8\u7EA7\u6B21\u7684\u5C0F\u65AD\u5C42\u5728\u9644\u8FD1\u5B58\u5728"],
-        todo: ["\u6CBF\u63A5\u89E6\u9762\u8FFD\u7D22\u6570\u767E\u7C73\uFF0C\u786E\u8BA4\u662F\u5426\u59CB\u7EC8\u8FDE\u7EED", "\u91C7\u96C6\u5CA9\u5173\u7EC4\u4E0E\u5927\u5858\u7EC4\u53E4\u751F\u7269\u5316\u77F3\uFF0C\u6821\u5BF9\u65F6\u4EE3", "\u6D4B\u91CF\u63A5\u89E6\u9762\u9644\u8FD1\u5CA9\u5C42\u53D8\u5316\uFF0C\u5224\u65AD\u662F\u5426\u5B58\u5728\u9690\u853D\u4E0D\u6574\u5408"]
+        keep: ["上下产状一致、层序连续，两套地层为整合接触", "白云岩→灰岩的岩性突变指示沉积环境由局限台地/潮坪转为开阔浅海", "短暂构造沉降是沉积水体加深的驱动因素"],
+        cannot: ["仅凭露头无法区分原生白云岩沉积与后生白云岩化作用", "无法精确定量沉降幅度、沉降时代与速率"],
+        todo: ["做薄片微相分析，确认白云岩结构与原生成因", "采集古生物与同位素样品，约束时代与环境", "与区域同期地层对比，验证构造沉降的横向一致性"]
       }
     }
   ];
@@ -21518,7 +21523,8 @@ textarea::placeholder{color:var(--faint);}
     const p = params;
     const cover = column.filter((c) => c.group !== "upper");
     const upper = column.filter((c) => c.group === "upper");
-    const thicknesses = cover.map((c) => c.thickness);
+    const baseDep = p.baseDeposit == null ? 1 : clamp01(p.baseDeposit);
+    const thicknesses = cover.map((c) => c.thickness * baseDep);
     const fold = solveFold({
       xs,
       baseY: MODEL.baseY,
@@ -21538,11 +21544,30 @@ textarea::placeholder{color:var(--faint);}
       return o;
     });
     const tiltTan = Math.tan(((p.tilt || 0) + (p.forcedTilt || 0) * (p.tiltStage == null ? 1 : p.tiltStage)) * DEG);
+    const tiltDir = p.tiltDir == null ? 1 : p.tiltDir;
     if (Math.abs(tiltTan) > 1e-6) {
       horizons = horizons.map((c) => {
         const o = new Float64Array(c.length);
         for (let i = 0; i < c.length; i++)
-          o[i] = c[i] + (xs[i] + MODEL.width * 0.5) * tiltTan * (p.tiltScale == null ? 0.35 : p.tiltScale);
+          o[i] = c[i] + tiltDir * (xs[i] + MODEL.width * 0.5) * tiltTan * (p.tiltScale == null ? 0.35 : p.tiltScale);
+        return o;
+      });
+    }
+    const uplift = p.uplift || 0;
+    if (Math.abs(uplift) > 1e-6) {
+      horizons = horizons.map((c) => {
+        const o = new Float64Array(c.length);
+        for (let i = 0; i < c.length; i++)
+          o[i] = c[i] + uplift;
+        return o;
+      });
+    }
+    const subsidence = p.subsidence || 0;
+    if (Math.abs(subsidence) > 1e-6) {
+      horizons = horizons.map((c) => {
+        const o = new Float64Array(c.length);
+        for (let i = 0; i < c.length; i++)
+          o[i] = c[i] - subsidence;
         return o;
       });
     }
@@ -21564,14 +21589,18 @@ textarea::placeholder{color:var(--faint);}
         planeY: (x) => f.fy - (x - f.fx) * Math.tan(f.dipDeg * DEG)
       };
     }
-    const soleTh = 1.8;
+    const soleTh = 1.8 * baseDep;
     const bottom = new Float64Array(xs.length);
     for (let i = 0; i < xs.length; i++)
       bottom[i] = horizons[0][i] - soleTh;
     const curves = [bottom, ...horizons];
     const noise = makeNoise1D(seed * 31 + 5);
     const coverTop = curves[curves.length - 1];
-    const maxTop = Math.max(...Array.from(coverTop));
+    const depAll = clamp01(p.deposit == null ? 1 : p.deposit);
+    const upperThick = upper.reduce((a, c) => a + c.thickness, 0) * depAll;
+    let maxTop = -Infinity;
+    for (let i = 0; i < coverTop.length; i++)
+      maxTop = Math.max(maxTop, coverTop[i] + upperThick);
     const eroLevel = maxTop - (p.erodeDepth || 0);
     const eroAmp = p.erodeRelief || 0;
     const eroLvl0 = eroLevel;
@@ -21629,71 +21658,23 @@ textarea::placeholder{color:var(--faint);}
       }
       layers.push({ ...cover[i], yBot, yTop, present, coverIndex: i });
     }
-    if (upper.length) {
-      const dep = clamp01(p.deposit == null ? 1 : p.deposit);
-      if (!hasErosion) {
-        let base = Float64Array.from(curves[curves.length - 1]);
-        for (let i = 0; i < upper.length; i++) {
-          const th = upper[i].thickness * dep;
-          const yTop = new Float64Array(xs.length);
-          for (let j = 0; j < xs.length; j++)
-            yTop[j] = base[j] + th;
-          const present = new Uint8Array(xs.length);
-          for (let j = 0; j < xs.length; j++)
-            present[j] = th > 0.02 ? 1 : 0;
-          layers.push({ ...upper[i], yBot: Float64Array.from(base), yTop, present, isUpper: true });
-          base = yTop;
-        }
-      } else if (dep > 5e-3) {
-        const ground = new Float64Array(xs.length);
-        let mnG = Infinity, mxG = -Infinity;
+    if (upper.length && depAll > 5e-3) {
+      let base = Float64Array.from(curves[curves.length - 1]);
+      for (let i = 0; i < upper.length; i++) {
+        const th = upper[i].thickness * depAll;
+        const yBot = new Float64Array(xs.length);
+        const yTop = new Float64Array(xs.length);
+        const present = new Uint8Array(xs.length);
         for (let j = 0; j < xs.length; j++) {
-          let g0 = bottom[j];
-          for (let k = 0; k < layers.length; k++) {
-            if (layers[k].present[j] && layers[k].yTop[j] > g0)
-              g0 = layers[k].yTop[j];
-          }
-          ground[j] = g0;
-          if (g0 < mnG)
-            mnG = g0;
-          if (g0 > mxG)
-            mxG = g0;
+          yBot[j] = base[j];
+          let t2 = base[j] + th;
+          if (hasErosion)
+            t2 = Math.max(base[j], Math.min(t2, eroAt(xs[j])));
+          yTop[j] = t2;
+          present[j] = t2 - base[j] > 0.02 ? 1 : 0;
         }
-        const L1 = mnG + (mxG - mnG) * 0.45 + 0.1;
-        const BASAL_END = upper.length > 1 ? 0.5 : 1;
-        {
-          const g = clamp01(dep / BASAL_END);
-          const lvl = mnG + g * (L1 - mnG);
-          const damp2 = Math.pow(1 - g, 1.3);
-          const yBot = new Float64Array(xs.length);
-          const yTop = new Float64Array(xs.length);
-          const present = new Uint8Array(xs.length);
-          for (let j = 0; j < xs.length; j++) {
-            yBot[j] = ground[j];
-            const bump = eroAmp * damp2 * (1.8 * fbm1D(noise, xs[j] * 0.028 + 9.7, 2) + 0.5 * fbm1D(noise, xs[j] * 0.105 + 2.3, 2));
-            yTop[j] = Math.max(ground[j], lvl + bump);
-            present[j] = yTop[j] - yBot[j] > 0.02 ? 1 : 0;
-          }
-          layers.push({ ...upper[0], yBot, yTop, present, isUpper: true });
-        }
-        let plane = L1;
-        const rest = upper.length - 1;
-        for (let i = 1; i < upper.length; i++) {
-          const s = BASAL_END + (i - 1) * (1 - BASAL_END) / rest;
-          const e = BASAL_END + i * (1 - BASAL_END) / rest;
-          const g = clamp01((dep - s) / (e - s));
-          const th = upper[i].thickness * g;
-          const yBot = new Float64Array(xs.length);
-          const yTop = new Float64Array(xs.length);
-          const present = new Uint8Array(xs.length);
-          for (let j = 0; j < xs.length; j++) {
-            yBot[j] = Math.max(plane, ground[j]);
-            yTop[j] = plane + th;
-            present[j] = yTop[j] - yBot[j] > 0.02 ? 1 : 0;
-          }
-          layers.push({ ...upper[i], yBot, yTop, present, isUpper: true });
-          plane += th;
-        }
+        layers.push({ ...upper[i], yBot, yTop, present, isUpper: true });
+        base = yTop;
       }
     }
     if (sculpt && sculpt.on !== false && Array.isArray(sculpt.delta)) {
@@ -21721,7 +21702,7 @@ textarea::placeholder{color:var(--faint);}
       }
     }
     const karstDepth = p.karstDepth || 0;
-    const karstInfo = { active: karstDepth > 0.05, depth: karstDepth, sinkholes: [], cave: null };
+    const karstInfo = { active: karstDepth > 0.05 && baseDep > 0.05, depth: karstDepth, sinkholes: [], cave: null };
     if (karstInfo.active) {
       const sites = [
         { x: -54, w: 11, k: 1 },
@@ -21770,10 +21751,17 @@ textarea::placeholder{color:var(--faint);}
       }
       topCurve[j] = t0;
     }
+    const seaAmt = clamp01(p.sea == null ? 0 : p.sea);
+    const sea = {
+      active: seaAmt > 0.03,
+      level: p.seaLevel == null ? 22.2 : p.seaLevel,
+      opacity: 0.58 * seaAmt
+    };
     return {
       xs,
       layers,
       fold,
+      sea,
       erosion: { active: (p.erodeDepth || 0) > 0.05, level: eroLvl0, amplitude: eroAmp, at: eroAt, window: winD > 0.01 },
       fault: faultInfo,
       karst: karstInfo,
@@ -21922,10 +21910,11 @@ textarea::placeholder{color:var(--faint);}
         mxE = Math.max(mxE, v);
       }
       let missing = 0;
+      const iA = Math.floor(xs.length * 0.2), iB = Math.ceil(xs.length * 0.8);
       for (const l of layers)
         if (!l.group || l.group !== "upper") {
           let any = true;
-          for (let i = 0; i < xs.length; i++)
+          for (let i = iA; i <= iB; i++)
             if (!l.present[i]) {
               any = false;
               break;
@@ -23864,7 +23853,7 @@ textarea::placeholder{color:var(--faint);}
   // ── 构造应力箭头 ────────────────────────────────────────
   function forceState(caseId, p) {
     if (caseId === "unconformity")
-      return { kind: "uplift", text: "\u6784\u9020\u62AC\u5347 / \u5265\u8680\u5378\u8F7D", color: 16098628 };
+      return { kind: "subside", text: "构造沉降 / 沉积环境演变", color: 16098628 };
     if (caseId === "fault" && p && p.faultType === "reverse")
       return { kind: "compress", text: "\u533A\u57DF\u6324\u538B \u03C3\u2081", color: 16739146 };
     if (caseId === "fault")
@@ -23875,10 +23864,10 @@ textarea::placeholder{color:var(--faint);}
   function forceAnchors(caseId, p, snap, zFront) {
     const st = forceState(caseId, p);
     const half = MODEL.width / 2;
-    if (st.kind === "uplift") {
+    if (st.kind === "subside") {
       return [
-        { text: "<b>\u62AC\u5347</b>", x: -half * 0.74, y: snap.maxTop + 18, z: zFront },
-        { text: "<b>\u5265\u8680</b>", x: half * 0.4, y: snap.maxTop + 26, z: zFront }
+        { text: "<b>构造沉降</b> · 水体加深", x: -half * 0.74, y: snap.maxTop + 18, z: zFront },
+        { text: "<b>后期剥蚀</b>", x: half * 0.4, y: snap.maxTop + 26, z: zFront }
       ];
     }
     return [
@@ -23918,6 +23907,9 @@ textarea::placeholder{color:var(--faint);}
     } else if (st.kind === "tension") {
       add(new Vector3(-half * 0.52, y, 0), new Vector3(-1, 0, 0), 22, st.color);
       add(new Vector3(half * 0.52, y, 0), new Vector3(1, 0, 0), 22, st.color);
+    } else if (st.kind === "subside") {
+      add(new Vector3(-half * 0.74, top + 16, 0), new Vector3(0, -1, 0), 13, st.color);
+      add(new Vector3(half * 0.4, top + 24, 0), new Vector3(0, -1, 0), 12, 16098628);
     } else {
       add(new Vector3(-half * 0.74, top + 2, 0), new Vector3(0, 1, 0), 15, st.color);
       add(new Vector3(half * 0.4, top + 24, 0), new Vector3(0, -1, 0), 12, 16098628);
@@ -24676,8 +24668,20 @@ textarea::placeholder{color:var(--faint);}
     const out = [];
     if (caseId === "unconformity" && snap.fold) {
       const fx = snap.fold.phaseX;
-      out.push({ text: "<b>\u5927\u5858\u7EC4</b> \u767D\u4E91\u5CA9", x: fx - 46, y: topY(fx - 46) - 3, z: zFront });
-      out.push({ text: "<b>\u5CA9\u5173\u7EC4</b> \u77F3\u7070\u5CA9", x: fx + 42, y: topY(fx + 42) - 9.5, z: zFront });
+      const dol = snap.layers.find((l) => l.lith === "dolomiteKarst" && !l.isUpper);
+      const lim = snap.layers.find((l) => l.lith === "karst" && l.isUpper);
+      const iU = at(fx - 46);
+      const anyRock = snap.layers.some((l) => !l.isBasement && l.present[iU]);
+      if (!anyRock) {
+        out.push({ text: "<b>一片海洋</b> · 尚无沉积", x: fx - 26, y: (snap.sea ? snap.sea.level : snap.maxTop + 3) + 1.5, z: zFront });
+      } else {
+        if (lim && lim.present[iU]) {
+          out.push({ text: "<b>上部灰岩</b> · 开阔浅海", x: fx - 46, y: topY(fx - 46) - 3, z: zFront });
+          out.push({ text: "<b>整合接触</b> · 岩性突变=水体加深", x: fx - 8, y: lim.yBot[iU] + 0.6, z: zFront });
+        }
+        if (dol && dol.present[iU])
+          out.push({ text: "<b>下部白云岩</b> · 局限台地/潮坪", x: fx + 42, y: dol.yBot[iU] + 1.6, z: zFront });
+      }
     }
     if (caseId === "fold") {
       const cx = snap.fold.phaseX;
@@ -24694,35 +24698,6 @@ textarea::placeholder{color:var(--faint);}
       out.push({ text: "<b>\u4E0B\u76D8</b>", x: f.fx - 40, y: topY(f.fx - 40) + 1.5, z: zFront });
       out.push({ text: "<b>\u65AD\u5C42\u9762</b> \u2220" + f.dipDeg.toFixed(0) + "\xB0", x: f.fx + (f.fy - yMid) / Math.tan(f.dipDeg * Math.PI / 180), y: yMid, z: zFront });
       out.push({ text: "<b>\u89D2\u783E\u5CA9\u5E26</b>", x: f.fx + (f.fy - snap.minBottom - 3) / Math.tan(f.dipDeg * Math.PI / 180), y: snap.minBottom + 3, z: zFront });
-    } else if (caseId === "unconformity" && snap.erosion.active) {
-      const basal = snap.layers.find((l) => l.isUpper && l.basal);
-      let bx = -50, by = snap.erosion.at(-50) + 2.2, bth = 0;
-      if (basal) {
-        for (let j = 0; j < nx; j++) {
-          const th = basal.yTop[j] - basal.yBot[j];
-          if (basal.present[j] && th > bth) {
-            bth = th;
-            bx = xs[j];
-            by = basal.yBot[j] + th * 0.55;
-          }
-        }
-      }
-      let ex = 30, best = Infinity;
-      for (let j = 4; j < nx - 4; j++) {
-        const d = Math.abs(snap.topCurve[j] - snap.erosion.at(xs[j]));
-        if (d < best) {
-          best = d;
-          ex = xs[j];
-        }
-      }
-      const bBot = basal && basal.present[at(bx)] ? basal.yBot[at(bx)] : snap.erosion.at(bx);
-      out.push({ text: "<b>\u4E0D\u6574\u5408\u9762</b>", x: ex, y: snap.erosion.at(ex) + 0.6, z: zFront });
-      if (bth > 0.05)
-        out.push({ text: "<b>\u5E95\u783E\u5CA9</b>", x: bx, y: by, z: zFront });
-      const flat = snap.layers.filter((l) => l.isUpper && !l.basal && l.present.some((v) => v));
-      if (flat.length)
-        out.push({ text: "<b>\u4E0A\u8986\u6C34\u5E73\u5C42</b>", x: 52, y: topY(52) + 1.4, z: zFront });
-      out.push({ text: "<b>\u4E0B\u4F0F\u8936\u76B1</b>\uFF08\u88AB\u524A\u622A\uFF09", x: bx, y: bBot - 4.5, z: zFront });
     }
     if (showForces)
       forceAnchors(caseId, p, snap, zFront).forEach((a) => out.push(a));
@@ -24932,8 +24907,36 @@ textarea::placeholder{color:var(--faint);}
         maxY = Math.max(maxY, l.yTop[i]);
       }
     });
-    if (!isFinite(minY))
+    if (!isFinite(minY)) {
+      if (!(snap.sea && snap.sea.active))
+        return;
+      g.fillStyle = "#f5f2e8";
+      g.fillRect(0, 0, w, h);
+      g.strokeStyle = "#22231d";
+      g.lineWidth = 1.2;
+      g.strokeRect(0.6, 0.6, w - 1.2, h - 1.2);
+      const ol = 40, or2 = 40, ot = 30, ob = 34;
+      const og = g.createLinearGradient(0, ot, 0, h - ob);
+      og.addColorStop(0, "rgba(96,150,178,.10)");
+      og.addColorStop(1, "rgba(96,150,178,.30)");
+      g.fillStyle = og;
+      g.fillRect(ol, ot, w - ol - or2, h - ot - ob);
+      g.strokeStyle = "rgba(52,110,140,.9)";
+      g.lineWidth = 1.4;
+      g.beginPath();
+      g.moveTo(ol, ot);
+      g.lineTo(w - or2, ot);
+      g.stroke();
+      g.fillStyle = "rgba(38,82,104,.95)";
+      g.font = `600 ${w < 620 ? 11 : 13}px "Songti SC","SimSun",serif`;
+      g.textAlign = "center";
+      g.textBaseline = "middle";
+      g.fillText("\u4E00\u7247\u6D77\u6D0B \xB7 \u5C1A\u65E0\u6C89\u79EF", w / 2, (ot + h - ob) / 2);
+      g.textAlign = "left";
       return;
+    }
+    if (snap.sea && snap.sea.active)
+      maxY = Math.max(maxY, snap.sea.level + 1);
     const compact = w < 620;
     const tiny = h < 150;
     const PL = compact ? 38 : 56, PR = compact ? 38 : 56;
@@ -25112,6 +25115,36 @@ textarea::placeholder{color:var(--faint);}
         g.lineTo(px, py);
     }
     g.stroke();
+    if (snap.sea && snap.sea.active) {
+      const seaY = Y(snap.sea.level);
+      if (seaY > PT) {
+        g.save();
+        g.beginPath();
+        g.moveTo(X(xs[0]), seaY);
+        for (let i = 0; i < nx; i++)
+          g.lineTo(X(xs[i]), Math.min(Y(snap.topCurve[i]), seaY));
+        g.lineTo(X(xs[nx - 1]), seaY);
+        g.closePath();
+        const wg = g.createLinearGradient(0, seaY, 0, h - PB);
+        wg.addColorStop(0, "rgba(96,150,178,.10)");
+        wg.addColorStop(1, "rgba(96,150,178,.26)");
+        g.fillStyle = wg;
+        g.fill();
+        g.restore();
+        g.strokeStyle = "rgba(52,110,140,.85)";
+        g.lineWidth = 1.2;
+        g.beginPath();
+        g.moveTo(PL, seaY);
+        g.lineTo(w - PR, seaY);
+        g.stroke();
+        g.fillStyle = "rgba(38,82,104,.9)";
+        g.font = "8px 'PingFang SC',sans-serif";
+        g.textAlign = "right";
+        g.textBaseline = "bottom";
+        g.fillText("\u6D77\u9762", w - PR - 2, seaY - 3);
+        g.textAlign = "center";
+      }
+    }
     const nearIdx = (x) => {
       let k = 0, bd = Infinity;
       for (let i = 0; i < nx; i++) {
@@ -25210,7 +25243,7 @@ textarea::placeholder{color:var(--faint);}
       g.font = "8px 'PingFang SC',sans-serif";
       g.textAlign = "center";
       g.textBaseline = "alphabetic";
-      g.fillText("\u4E0D\u6574\u5408\u9762", X(xs[ex2]), Y(snap.erosion.at(xs[ex2])) - 8);
+      g.fillText("\u540E\u671F\u5265\u8680\u9762", X(xs[ex2]), Y(snap.erosion.at(xs[ex2])) - 8);
     }
     const barUnits = Math.min(20, (w - PL - PR) * 0.3 / sx);
     const bx = PL + 2, byy = h - 14;
@@ -25340,12 +25373,16 @@ textarea::placeholder{color:var(--faint);}
       faultType: ["\u65AD\u5C42\u6027\u8D28", params.faultType === "normal" ? "\u6B63\u65AD\u5C42\uFF08\u62C9\u5F20\uFF09" : "\u9006\u65AD\u5C42\uFF08\u6324\u538B\uFF09"],
       faultSlip: ["\u65AD\u8DDD", `${(params.faultSlip * params.faultMaxSlip * 10).toFixed(0)} m`],
       faultDragW: ["\u7275\u5F15\u5E26\u5BBD\u5EA6", `${(params.faultDragW * 10).toFixed(0)} m`],
-      tilt: ["\u4E0B\u4F0F\u5C42\u6380\u659C", `${params.tilt.toFixed(1)}\xB0`]
+      tilt: ["\u4E0B\u4F0F\u5C42\u6380\u659C", `${params.tilt.toFixed(1)}\xB0`],
+      baseDeposit: ["下部白云岩沉积比例", `${(params.baseDeposit * 100).toFixed(0)} %`],
+      deposit: ["上部灰岩沉积比例", `${(params.deposit * 100).toFixed(0)} %`],
+      subsidence: ["短暂沉降幅度", `${((params.subsidence || 0) * 10).toFixed(0)} m`],
+      sea: ["海水覆盖", `${((params.sea || 0) * 100).toFixed(0)} %`]
     };
     const order = {
       fold: ["shorten", "wavelength", "erodeDepth", "erodeRelief"],
       fault: ["faultDip", "faultType", "faultSlip", "faultDragW"],
-      unconformity: ["shorten", "tilt", "erodeDepth", "erodeRelief"]
+      unconformity: ["baseDeposit", "deposit", "subsidence", "tilt", "erodeDepth"]
     }[caseDef.id] || ["shorten", "wavelength", "erodeDepth"];
     return order.map((k) => `<tr><td>${all[k][0]}</td><td>${all[k][1]}</td></tr>`).join("");
   }
@@ -25510,8 +25547,8 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
     try {
       const d = JSON.parse(localStorage.getItem(LS) || "{}");
       if (d.params && typeof d.params === "object") {
-        if (d.params.unconformity && d.params.unconformity.erodeDepth === 7.2) {
-          d.params.unconformity.erodeDepth = 28;
+        if (d.params.unconformity && !Object.prototype.hasOwnProperty.call(d.params.unconformity, "baseDeposit")) {
+          delete d.params.unconformity;
         }
         CASES.forEach((c) => {
           if (d.params[c.id])
@@ -25818,7 +25855,8 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
     const pEnd = effectiveParams(def, S.params[def.id], 1);
     const snapEnd = buildSection({ xs: XS, column: def.column, params: pEnd, seed: def.seed || 7 });
     const topoAmp = S.mode === "analysis" ? 0.25 : 0.85;
-    return { minX: -MODEL.width / 2, maxX: MODEL.width / 2, minY: snapEnd.minBottom, maxY: snapEnd.maxTop + topoAmp };
+    const seaPad = def.id === "unconformity" ? 8 : 0;
+    return { minX: -MODEL.width / 2, maxX: MODEL.width / 2, minY: snapEnd.minBottom, maxY: snapEnd.maxTop + topoAmp + seaPad };
   }
   var CMP_OFF = 0;
   function buildCompareScene(p, def, o) {
@@ -25879,7 +25917,7 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
     S.snap = snap;
     const { zFront, zBack } = zPlanes();
     const topoAmp = S.mode === "analysis" ? 0.25 : 0.85;
-    const isKarst = (p.karstDepth || 0) > 0.05;
+    const isKarst = !!(snap.karst && snap.karst.active);
     if (S.caseId === "fault" && S.compare) {
       buildCompareScene(p, def, { zFront, zBack, topoAmp, isKarst, full });
       S.dirty = false;
@@ -25897,31 +25935,8 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
       S._forceGroup = null;
     if (S.mode !== "analysis") {
       let water = null;
-      if (snap.erosion.active) {
-        const dep = p.deposit == null ? 1 : Math.max(0, Math.min(1, p.deposit));
-        const rise = Math.min(1, Math.max(0, (dep - 0.42) / 0.16));
-        const fall = Math.min(1, Math.max(0, (1 - dep) / 0.1));
-        const op = 0.5 * rise * fall;
-        if (op > 0.04) {
-          const ups = snap.layers.filter((l) => l.isUpper);
-          let topmost = null;
-          for (let i = ups.length - 1; i >= 0; i--) {
-            if (ups[i].present.some((v) => v)) {
-              topmost = ups[i];
-              break;
-            }
-          }
-          if (topmost) {
-            const tops = [];
-            for (let j = 0; j < XS.length; j++)
-              if (topmost.present[j])
-                tops.push(topmost.yTop[j]);
-            tops.sort((a, b) => a - b);
-            const level = tops[Math.floor(tops.length * 0.25)] + 0.3;
-            water = { level, opacity: op };
-          }
-        }
-      }
+      if (snap.sea && snap.sea.active)
+        water = { level: snap.sea.level, opacity: snap.sea.opacity };
       S._propsGroup = buildProps(snap, { zFront, zBack, topoAmp, seed: 11 + def.no.charCodeAt(0), water, karst: isKarst });
       root.add(S._propsGroup);
     } else {
@@ -25936,7 +25951,7 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
     built = res;
     applyLayerFocus();
     if (full) {
-      stage.frame(S.frameBounds || { minX: -MODEL.width / 2, maxX: MODEL.width / 2, minY: snap.minBottom, maxY: snap.maxTop + topoAmp + (S.showForces ? 17 : 0) }, MODEL.depth);
+      stage.frame(S.frameBounds || { minX: -MODEL.width / 2, maxX: MODEL.width / 2, minY: snap.minBottom, maxY: snap.maxTop + topoAmp + (S.showForces ? 17 : 0) + (S.caseId === "unconformity" ? 4 : 0) }, MODEL.depth);
     }
     labels.set(anchorsFor(snap, S.caseId, zFront + 0.3 + zShift, p, S.showForces));
     if (!S.playing || (S.stripTick = (S.stripTick || 0) + 1) % 3 === 0)
@@ -26418,7 +26433,7 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
     }
     refreshSectionLegend(S.snap);
     const fs = forceState(S.caseId, S.p || {});
-    const forces = fs.kind === "uplift" ? null : { compress: fs.kind === "compress" };
+    const forces = fs.kind === "subside" ? null : { compress: fs.kind === "compress" };
     drawSection($("#stripCanvas"), S.snap, { mode: S.mode, hover: S.secHover, pin: S.secPin, accent, forces });
     const f = S.snap.fold;
     const m = S.metrics || null;
@@ -26588,7 +26603,7 @@ ${metrics.unc ? `| \u4E0B\u4F0F/\u4E0A\u8986\u4EA7\u72B6\u5DEE | ${metrics.unc.d
           mode: S.mode,
           pin: S.secPin,
           accent: S.accent,
-          forces: forceState(S.caseId, S.p || {}).kind === "uplift" ? null : { compress: forceState(S.caseId, S.p || {}).kind === "compress" }
+          forces: forceState(S.caseId, S.p || {}).kind === "subside" ? null : { compress: forceState(S.caseId, S.p || {}).kind === "compress" }
         });
       $("#stripCanvas").toBlob((b) => downloadBlob(b, name), "image/png");
     };
